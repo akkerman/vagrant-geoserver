@@ -1,0 +1,15 @@
+---
+# file: roles/geoserver/tasks/main.yml
+
+- name: ensure unzip is installed
+  apt: pkg=unzip state=installed
+
+- name: download GeoServer
+  get_url: url=http://sourceforge.net/projects/geoserver/files/GeoServer/2.4.0/geoserver-2.4.0-war.zip dest=/tmp
+
+- name: unzip GeoServer
+  command: chdir=/tmp /usr/bin/unzip geoserver-2.4.0-war.zip  geoserver.war
+
+- name: deploy GeoServer
+  command: mv /tmp/geoserver.war /var/lib/tomcat7/webapps/
+  sudo: yes

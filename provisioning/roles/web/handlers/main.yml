@@ -1,0 +1,8 @@
+---
+# file: roles/web/handlers/main.yml
+
+- name: restart apache
+  service: name=apache2 state=restarted
+
+- name: restart tomcat
+  service: name=tomcat7 state=restarted

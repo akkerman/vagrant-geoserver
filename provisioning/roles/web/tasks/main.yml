@@ -1,0 +1,26 @@
+---
+# file: roles/web/tasks/main.yml
+
+- name: ensure apache is at the latest version
+  apt: pkg=apache2 state=latest
+  sudo: yes  
+
+- name: ensure apache2 is running
+  service: name=apache2 state=started
+  sudo: yes  
+
+- name: ensure tomcat7 is at the latest version
+  action: apt pkg={{item}} state=latest
+  with_items:
+    - tomcat7
+    - tomcat7-admin
+  sudo: yes
+
+- name: ensure tomcat7 is running
+  service: name=tomcat7 state=started
+  sudo: yes   
+
+- name: copy tomcat-users.xml
+  copy: src=tomcat-users.xml dest=/etc/tomcat7/tomcat-users.xml
+  sudo: yes
+  notify: restart tomcat

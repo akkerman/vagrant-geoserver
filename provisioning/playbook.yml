@@ -1,0 +1,10 @@
+---
+# file: playbook.yml
+
+- hosts: all
+  vars: 
+    remote_user: vagrant
+    sudo: True
+  roles:
+    - web
+    - geoserver
