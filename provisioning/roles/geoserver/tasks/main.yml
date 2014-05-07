@@ -1,9 +1,6 @@
 ---
 # file: roles/geoserver/tasks/main.yml
 
-- name: ensure unzip is installed
-  apt: pkg=unzip state=installed
-
 - name: check if geoserver exists
   shell: "[ -e /var/lib/tomcat7/webapps/geoserver.war ] && echo 'Found' || echo ''"
   register: geoserver_installed
@@ -17,8 +14,8 @@
   sudo: yes
   notify: restart apache
 
-- name: copy proxy configuration
-  copy: src=proxy.conf dest=/etc/apache2/conf-enabled/proxy.conf
+- name: copy geoserver configuration
+  copy: src=geoserver.conf dest=/etc/apache2/conf-enabled/geoserver.conf
   notify: restart apache
 
 
