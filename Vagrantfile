@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
-  #config.vm.network "public_network"
+  config.vm.network "public_network"
 
 
   config.vm.provider "virtualbox" do |vb|
@@ -33,5 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+  # vagrant up  4,26s user 2,49s system 4% cpu 2:43,14 total
 
 end

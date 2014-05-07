@@ -6,6 +6,7 @@
     remote_user: vagrant
     sudo: True
   roles:    
+    - common
     - web
     - db
     - geoserver

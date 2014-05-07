@@ -1,12 +1,6 @@
 ---
 # file: roles/db/tasks/main.yml
 
-
-# TODO move this to common
-- name: generate locale
-  command: locale-gen en_US en_US.UTF-8 nl_NL nl_NL.UTF-8
-  sudo: yes
-
 - name: install posgresql
   action: apt pkg={{item}} state=installed
   with_items:

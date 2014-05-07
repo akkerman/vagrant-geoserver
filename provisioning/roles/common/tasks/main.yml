@@ -1,0 +1,14 @@
+---
+# file: roles/common/tasks/main.yml
+
+- name: ensure squid-deb-proxy-client is installed
+  apt: pkg=squid-deb-proxy-client state=installed
+  sudo: yes
+
+- name: ensure unzip is installed
+  apt: pkg=unzip state=installed
+  sudo: yes
+
+- name: generate locale
+  command: locale-gen en_US en_US.UTF-8 nl_NL nl_NL.UTF-8
+  sudo: yes
