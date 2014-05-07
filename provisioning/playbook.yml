@@ -5,6 +5,7 @@
   vars: 
     remote_user: vagrant
     sudo: True
-  roles:
+  roles:    
     - web
+    - db
     - geoserver

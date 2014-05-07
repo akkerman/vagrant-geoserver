@@ -1,0 +1,27 @@
+---
+# file: roles/db/tasks/main.yml
+
+
+# TODO move this to common
+- name: generate locale
+  command: locale-gen en_US en_US.UTF-8 nl_NL nl_NL.UTF-8
+  sudo: yes
+
+- name: install posgresql
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - postgresql 
+    - postgresql-contrib
+  sudo: yes
+
+- name: install dependencies for posgresql_user module
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - libpq-dev
+    - python-psycopg2
+  sudo: yes  
+
+- name: change postgresql password
+  postgresql_user: name=postgres password=postgres
+  sudo: yes
+  sudo_user: postgres
