@@ -1,0 +1,11 @@
+---
+# file: roles/geoserver/tasks/download_install.yml
+- name: download GeoServer
+  get_url: url=http://sourceforge.net/projects/geoserver/files/GeoServer/2.4.0/geoserver-2.4.0-war.zip dest=/home/vagrant/geoserver-2.4.0-war.zip
+
+- name: unzip GeoServer
+  command: chdir=/home/vagrant/ /usr/bin/unzip geoserver-2.4.0-war.zip  geoserver.war
+
+- name: deploy GeoServer
+  command: mv /home/vagrant/geoserver.war /var/lib/tomcat7/webapps/geoserver.war
+  sudo: yes

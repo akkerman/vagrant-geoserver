@@ -4,12 +4,21 @@
 - name: ensure unzip is installed
   apt: pkg=unzip state=installed
 
-- name: download GeoServer
-  get_url: url=http://sourceforge.net/projects/geoserver/files/GeoServer/2.4.0/geoserver-2.4.0-war.zip dest=/tmp
+- name: check if geoserver exists
+  shell: "[ -e /var/lib/tomcat7/webapps/geoserver.war ] && echo 'Found' || echo ''"
+  register: geoserver_installed
 
-- name: unzip GeoServer
-  command: chdir=/tmp /usr/bin/unzip geoserver-2.4.0-war.zip  geoserver.war
+- name: download and deploy geoserver
+  include: download_install.yml
+  when: (not geoserver_installed.stdout)
 
-- name: deploy GeoServer
-  command: mv /tmp/geoserver.war /var/lib/tomcat7/webapps/
+- name: enable apache proxy modules
+  command: a2enmod proxy proxy_ajp
   sudo: yes
+  notify: restart apache
+
+- name: copy proxy configuration
+  copy: src=proxy.conf dest=/etc/apache2/conf-enabled/proxy.conf
+  notify: restart apache
+
+

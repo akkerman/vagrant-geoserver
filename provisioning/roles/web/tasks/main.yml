@@ -24,3 +24,8 @@
   copy: src=tomcat-users.xml dest=/etc/tomcat7/tomcat-users.xml
   sudo: yes
   notify: restart tomcat
+
+- name: copy server.xml
+  copy: src=server.xml dest=/etc/tomcat7/server.xml
+  sudo: yes
+  notify: restart tomcat
