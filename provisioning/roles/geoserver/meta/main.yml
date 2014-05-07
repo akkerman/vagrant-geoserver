@@ -2,4 +2,4 @@
 # file: roles/geoserver/meta/main.yml
 dependencies:
   - { role: web }
-#  - { role: db, dbname: geoserver }
+  - { role: db }
