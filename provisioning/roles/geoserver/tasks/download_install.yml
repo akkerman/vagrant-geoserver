@@ -8,4 +8,3 @@
 
 - name: deploy GeoServer
   command: mv /home/vagrant/geoserver.war /var/lib/tomcat7/webapps/geoserver.war
-  sudo: yes

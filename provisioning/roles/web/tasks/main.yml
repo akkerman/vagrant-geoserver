@@ -3,41 +3,32 @@
 
 - name: ensure apache is installed
   apt: pkg=apache2 state=installed
-  sudo: yes  
 
 - name: ensure apache2 is running
   service: name=apache2 state=started
-  sudo: yes  
 
 - name: add oracle-java ppa
   apt_repository: repo=ppa:webupd8team/java state=present
-  sudo: yes
 
 - name: automatically accept oracle license
   shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-  sudo: yes
 
 - name: install oracle-java7
   apt: pkg=oracle-java7-installer state=latest update-cache=yes force=yes
-  sudo: yes
 
 - name: ensure tomcat7 is installed
   action: apt pkg={{item}} state=installed
   with_items:
     - tomcat7
     - tomcat7-admin
-  sudo: yes
 
 - name: ensure tomcat7 is running
   service: name=tomcat7 state=started
-  sudo: yes   
 
 - name: copy tomcat-users.xml
   copy: src=tomcat-users.xml dest=/etc/tomcat7/tomcat-users.xml
-  sudo: yes
   notify: restart tomcat
 
 - name: copy server.xml
   copy: src=server.xml dest=/etc/tomcat7/server.xml
-  sudo: yes
   notify: restart tomcat

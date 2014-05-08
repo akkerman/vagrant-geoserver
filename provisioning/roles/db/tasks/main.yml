@@ -6,16 +6,13 @@
   with_items:
     - postgresql 
     - postgresql-contrib
-  sudo: yes
 
 - name: install dependencies for posgresql_user module
   action: apt pkg={{item}} state=installed
   with_items:
     - libpq-dev
     - python-psycopg2
-  sudo: yes  
 
 - name: change postgresql password
   postgresql_user: name=postgres password=postgres
-  sudo: yes
   sudo_user: postgres
