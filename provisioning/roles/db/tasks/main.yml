@@ -4,8 +4,8 @@
 - name: install posgresql
   action: apt pkg={{item}} state=installed
   with_items:
-    - postgresql 
-    - postgresql-contrib
+    - postgresql-9.3 
+    - postgresql-contrib-9.3
 
 - name: install dependencies for posgresql_user module
   action: apt pkg={{item}} state=installed
@@ -16,3 +16,10 @@
 - name: change postgresql password
   postgresql_user: name=postgres password=postgres
   sudo_user: postgres
+
+- name: install postgresql-postgis
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - postgis 
+    - postgresql-9.3-postgis-2.1 
+    - postgresql-9.3-postgis-2.1-scripts
