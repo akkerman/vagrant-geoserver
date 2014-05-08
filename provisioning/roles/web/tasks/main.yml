@@ -10,6 +10,9 @@
   sudo: yes  
 
 # TODO install oracle java
+# sudo add-apt-repository ppa:webupd8team/java
+# sudo apt-get update
+# sudo apt-get install oracle-java7-installer 
 
 - name: ensure tomcat7 is installed
   action: apt pkg={{item}} state=installed
